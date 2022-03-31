@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名案例_插值语法实现</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        Last Name: <input type="text" v-model="lastName">
+        <br>
+        First Name: <input type="text" v-model="firstName">
+        <br>
+        Full Name : <span>{{ lastName }}-{{ firstName }}</span>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    firstName: "Jean",
+                    lastName: "Zhang"
+                }
+            },
+        })
+    </script>
+</body>
+</html>

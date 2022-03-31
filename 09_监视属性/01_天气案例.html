@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气案例</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气(三元表达式){{ isHot ? "炎热":"凉爽" }}</h2>
+        <h2>今天天气(计算属性){{ info }}</h2>
+        <button @click="toggleWeather">切换天气方式一</button>
+        <button @click="isHot = !isHot">切换天气方式二</button>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    isHot:true
+                }
+            },
+            methods: {
+                toggleWeather() {
+                    this.isHot = !this.isHot
+                }
+            },
+            computed:{
+                info() {
+                    return this.isHot ? "炎热":"凉爽"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

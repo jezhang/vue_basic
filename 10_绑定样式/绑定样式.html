@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绑定样式</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .basic {
+            border: 1px solid black;
+            padding: 20px 20px 20px 20px;
+            margin: 20px 20px 20px 20px;
+        }
+        .happy {
+            border: 4px solid red;
+            background-color: yellowgreen;
+            background: linear-gradient(30deg, yellow, pink, orange, yellow);
+        }
+        .sad {
+            background-color: gray;
+        }
+        .normal {
+            background-color: skyblue;
+        }
+        .style1 {
+            background-color: green;
+        }
+        .style2 {
+            background-color: pink;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        .style3 {
+            background-color: aquamarine;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        绑定样式：
+        1.class样式
+        写法：class="xxx" xxx可以是字符串、对象、数组。
+        字符串写法适用于：类名不确定，要动态获取。
+        对象写法适用于：要绑定多个样式，个数不确定，名字也不确定。
+        数组写法适用一于：要绑定多个样式，个数确定，名字也确定，但不确定川不用。
+        2.style样式
+        ：sty1e="{fontSize:xxx}"其中xxx是动态值。
+        ：style="[a,b]"其中a、b是样式对象。
+     -->
+    <div id="root">
+        <!-- 绑定class样式--字符串写法，适用于：样式的类名不确定，需要动态确定 -->
+        <div class="basic" :class="mood"  @click="changeMood">{{ name }}</div>
+        <!-- 绑定class样式--数组写法，适用于：要绑定的样式个数不确定、名字也不确定 -->
+        <div class="basic" :class="classArr">{{ name }}</div>
+        <!-- 绑定class样式一对象写法。适用于：要绑定的样式个数确定、名字也确定，但要动态决定用不用
+ -->
+        <div class="basic" :class="classObj">{{ name }}</div>
+        <!-- 绑定style样式 -->
+        <div class="basic" :style="{fontSize: fsize + 'px'}">{{ name }}</div>
+        <div class="basic" :style="styleObj">{{ name }}</div>
+        <div class="basic" :style="[styleObj1, styleObj2]">{{ name }}</div>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el : '#root',
+            data() {
+                return {
+                    name: "Hello World",
+                    mood: 'normal',
+                    classArr: ['style1', 'style2', 'style3'],
+                    classObj: {
+                        style1: true,
+                        style2: true,
+                    },
+                    fsize:22,
+                    styleObj: {
+                        fontSize: "28px",
+                        color: 'orange',
+                        backgroundColor: 'gray'
+                    },
+                    styleObj1: {
+                        color: 'red',
+                    },
+                    styleObj2: {
+                        backgroundColor: 'orange',
+                    }
+                }
+            },
+            methods: {
+                changeMood() {
+                    const arr = ['happy', 'sad', 'normal']
+                    this.mood = arr[Math.floor(Math.random() * 3)]
+                }
+            },
+        })
+    </script>
+</body>
+</html>

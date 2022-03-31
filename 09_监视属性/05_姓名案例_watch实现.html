@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05_姓名案例_watch实现.html</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        通过watch实现，修改姓名后等一秒后改变fullName(异步任务)
+     -->
+    <div id="root">
+        Last Name: <input type="text" v-model="lastName">
+        <br>
+        First Name: <input type="text" v-model="firstName">
+        <br>
+        Full Name(插值) : <span>{{ lastName }}-{{ firstName }}</span>
+        <br>
+        Full Name(Watch) : <span>{{ fullName }}</span>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    firstName: "Jean",
+                    lastName: "Zhang",
+                    fullName: "Jean-Zhang"
+                }
+            },
+            watch: {
+                firstName(newValue, oldValue) {
+                    setTimeout(() => {
+                        this.fullName = newValue + '-' + this.lastName
+                    }, 1000);
+                },
+                lastName(newValue, oldValue) {
+                    setTimeout(() => {
+                        this.fullName = this.firstName + '-' + newValue
+                    }, 1000);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
